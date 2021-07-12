@@ -2,7 +2,7 @@
 
 # Emprego - Caçador
 # By Carioca
-Com a intenção de revolucionar os empregos do FiveM, a Carioca Community oferece o Emprego de Caçador. Basicamente, você receberá o trabalho de caçar e abater os veados da cidade. Esse sistema possui o básico de todas as funcionalidades necessários para um emprego de caçador, mas com uma qualidade extraordinal. É possível tanto chamar um Uber quanto trabalhar de Uber.
+Com a intenção de revolucionar os empregos do FiveM, a Carioca Community oferece o Emprego de Caçador. Basicamente, você receberá o trabalho de caçar e abater os veados da cidade. Esse sistema possui o básico de todas as funcionalidades necessários para um emprego de caçador, mas com uma qualidade extraordinal.
 Além disso, foi preparado um arquivo de configuração, para que você possa ajustar o script da maneira que achar melhor.
 
 - **Teaser Oficial: https://www.youtube.com/watch?v=PCDm4BD4FIU**
