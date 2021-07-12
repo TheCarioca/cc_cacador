@@ -43,5 +43,5 @@ Caso o download da base esteja corrompendo, baixe utilizando o [GitHub Desktop](
 Vale ressaltar, que o determinadas funções possam apresentar problemas de acordo com sua base. Caso haja, entre em nosso [Discord](https://discord.gg/w6wK9MW4cW).
 
 ## Contato
-- **Servidor Discord: https://discord.gg/kYFy8JwVfd**
+- **Servidor Discord: https://discord.gg/78sERGaWQm**
 - **Discord: ropii#0001**
