@@ -1,4 +1,4 @@
---[ SCRIPT DESENVOLVIDO POR CARIOCA - Discord: discord.gg/cariocacommunity]---------------------------------------------------
+--[ SCRIPT DESENVOLVIDO POR CARIOCA - Discord: https://discord.gg/78sERGaWQm ]---------------------------------------------------
 
 local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
@@ -159,63 +159,69 @@ AddEventHandler('cc_cacador:spawnanimal',function()
 end
 end)
 
-RegisterNetEvent('cc_cacador:abater')
-AddEventHandler('cc_cacador:abater',function()
-	while emservico do
+local carioca = true
+
+Citizen.CreateThread(function()
+	while true do
 		local idle = 750
-		for i = 1,#animaisEntity do
-			CdsAnimal = GetEntityCoords(animaisEntity[i])
-			vidaAnimal = GetEntityHealth(animaisEntity[i])
-			local user_id = vRP.getUserId(source)
-			local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(),true))
-			local distanciaanimal = GetDistanceBetweenCoords(x,y,z,CdsAnimal.x,CdsAnimal.y,CdsAnimal.z,false)
-			if distanciaanimal <= 1.3 and vidaAnimal <= 0 then
-				if not IsPedInAnyVehicle(ped) then
-					idle = 5
-					DrawText3Ds(CdsAnimal.x,CdsAnimal.y,CdsAnimal.z+0.35,"Pressione [~p~E~w~] para ~p~ABATER~w~ o veado.")
-					if IsControlJustPressed(0,38) then
-						idle = 750
-						TriggerEvent('cancelando',false)
-						if DoesEntityExist(animaisEntity[i]) == 1 then
-							if GetSelectedPedWeapon(PlayerPedId()) == GetHashKey('WEAPON_KNIFE')  then
-								if emp.checkWeight(mochila) then
-								SetEntityAsMissionEntity(animaisEntity[i], false, false)
-									if DoesEntityExist(animaisEntity[i]) then
-										deletarentidade = true
-									end
-									vRP._playAnim(false,{{"amb@medic@standing@kneel@base","base"}},true)
-									vRP._playAnim(false,{{"anim@gangops@facility@servers@bodysearch@","player_search"}},true)
-									SetTimeout(6000,function()
-									vRP._stopAnim(false)
-									if abaterpronto == 1 then
-										TriggerServerEvent("cc_cacador:abaterpronto",abaterpronto)
-										abaterpronto = 0
-									end
-										TriggerEvent("cc_cacador:deletarentidade",animaisEntity[i])
-										if deletarentidade == true then
-											table.remove(animaisEntity,i)
-											deletarentidade = false
-											mochila = true
-											SetTimeout(1000,function()
-											abaterpronto = 1
-											end)
+		if emservico then
+			for i = 1,#animaisEntity do
+				CdsAnimal = GetEntityCoords(animaisEntity[i])
+				vidaAnimal = GetEntityHealth(animaisEntity[i])
+				local user_id = vRP.getUserId(source)
+				local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(),true))
+				local distanciaanimal = GetDistanceBetweenCoords(x,y,z,CdsAnimal.x,CdsAnimal.y,CdsAnimal.z,false)
+				if distanciaanimal <= 1.3 and vidaAnimal <= 0 then
+					if not IsPedInAnyVehicle(ped) then
+						print("AAAAAAAAA")
+						idle = 5
+
+						DrawText3Ds(CdsAnimal.x,CdsAnimal.y,CdsAnimal.z+0.35,"Pressione [~p~E~w~] para ~p~ABATER~w~ o veado.")
+						if IsControlJustPressed(0,38) then
+							idle = 750
+							TriggerEvent('cancelando',false)
+							if DoesEntityExist(animaisEntity[i]) == 1 then
+								if GetSelectedPedWeapon(PlayerPedId()) == GetHashKey('WEAPON_KNIFE')  then
+									if emp.checkWeight(mochila) then
+									SetEntityAsMissionEntity(animaisEntity[i], false, false)
+										if DoesEntityExist(animaisEntity[i]) then
+											deletarentidade = true
 										end
-									end)
-								elseif not mochila == false then
-									TriggerEvent("Notify","negado","<b>Mochila</b> cheia ou <b>itens insuficientes</b> para o trabalho.",10000)
-									mochila = false
+										vRP._playAnim(false,{{"amb@medic@standing@kneel@base","base"}},true)
+										vRP._playAnim(false,{{"anim@gangops@facility@servers@bodysearch@","player_search"}},true)
+										SetTimeout(6000,function()
+										vRP._stopAnim(false)
+										if abaterpronto == 1 then
+											TriggerServerEvent("cc_cacador:abaterpronto",abaterpronto)
+											abaterpronto = 0
+										end
+											TriggerEvent("cc_cacador:deletarentidade",animaisEntity[i])
+											if deletarentidade == true then
+												table.remove(animaisEntity,i)
+												deletarentidade = false
+												mochila = true
+												carioca = true
+												SetTimeout(1000,function()
+												abaterpronto = 1
+												end)
+											end
+										end)
+									elseif not mochila == false then
+										TriggerEvent("Notify","negado","<b>Mochila</b> cheia ou <b>itens insuficientes</b> para o trabalho.",10000)
+										mochila = false
+									end
+								elseif faca == 1 then
+									TriggerEvent("Notify","negado","Você precisa pegar uma <b>Faca</b>!")
+									faca = 0
 								end
-							elseif faca == 1 then
-								TriggerEvent("Notify","negado","Você precisa pegar uma <b>Faca</b>!")
-								faca = 0
 							end
-						end
-					end	
-				end
-			elseif distanciaanimal > 1700 then
-				TriggerEvent("Notify","negado","Você está se <b>distanciando</b> dos animais!")
-				if distanciaanimal > 1800 then
-					TriggerEvent('cc_cacador:cancelar')
+						end	
+					end
+				elseif distanciaanimal > 1700 then
+					TriggerEvent("Notify","negado","Você está se <b>distanciando</b> dos animais!")
+					if distanciaanimal > 1800 then
+						TriggerEvent('cc_cacador:cancelar')
+					end
 				end
 			end
 		end
@@ -306,4 +312,4 @@ function modelRequest(model)
 	end
 end
 
---[ SCRIPT DESENVOLVIDO POR CARIOCA - Discord: discord.gg/cariocacommunity]---------------------------------------------------
+--[ SCRIPT DESENVOLVIDO POR CARIOCA - Discord: https://discord.gg/78sERGaWQm ]---------------------------------------------------
