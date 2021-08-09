@@ -173,7 +173,6 @@ Citizen.CreateThread(function()
 				local distanciaanimal = GetDistanceBetweenCoords(x,y,z,CdsAnimal.x,CdsAnimal.y,CdsAnimal.z,false)
 				if distanciaanimal <= 1.3 and vidaAnimal <= 0 then
 					if not IsPedInAnyVehicle(ped) then
-						print("AAAAAAAAA")
 						idle = 5
 
 						DrawText3Ds(CdsAnimal.x,CdsAnimal.y,CdsAnimal.z+0.35,"Pressione [~p~E~w~] para ~p~ABATER~w~ o veado.")
